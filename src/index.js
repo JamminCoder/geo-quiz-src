@@ -5,12 +5,16 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { createHashRouter, RouterProvider } from "react-router-dom";
 import Home from './pages/Home';
+import Continent from './pages/Continent';
 
 const router = createHashRouter([
-
 	{
 		path: '/',
         element: <Home/>
+	},
+	{
+		path: '/continents/:continentName',
+		element: <Continent/>
 	}
 
 ]);

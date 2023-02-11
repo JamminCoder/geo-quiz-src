@@ -1,3 +1,10 @@
 @tailwind base;
 @tailwind utilities;
 @tailwind components;
+
+
+@layer utilities {
+    .page {
+        @apply grid place-items-center py-16
+    }
+}
