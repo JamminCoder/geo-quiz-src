@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
-import { capatalizeFirstLetter, resolveCountryImagePath } from "../lib/utils";
+import { Link, useParams } from "react-router-dom";
+import { capatalizeFirstLetter, getCountries, resolveCountryImagePath } from "../lib/utils";
 
 export function Country({ continent, country }) {
     const imagePath = resolveCountryImagePath( continent, country );
@@ -24,24 +24,28 @@ export function CountriesDisplay({ continent, countriesArray }) {
 
 export default function Continent(props) {
     const { continentName } = useParams();
+    const properName = capatalizeFirstLetter(continentName);
+
     const [countriesArray, setCountriesArray] = useState();
     const [isLoaded, setIsLoaded] = useState(false);
 
     useEffect(() => {
-        fetch(`/continents/json/${ continentName }.json`)
-        .then(res => res.json())
-        .then(json => {
-            setCountriesArray(json.countries);
+        if (isLoaded) return;
+        
+        getCountries(continentName)
+        .then(countries => {
+            setCountriesArray(countries);
         })
         .catch(console.log)
         .finally(() => setIsLoaded(true))
     })
 
-    if (!isLoaded) return "Loading...";
+    if (!isLoaded) return 'Loading...';
 
     return (
     <div className='page'>
-        <h1 className='text-4xl font-bold mb-16'>{ capatalizeFirstLetter(continentName) }</h1>
+        <h1 className='text-4xl font-bold mb-16'>{ properName }</h1>
+        <Link to={`/quiz/${ continentName }`} className='link mb-8'>Take Quiz for { properName }</Link>
         <CountriesDisplay countriesArray={ countriesArray } continent={ continentName } />
     </div>
     );

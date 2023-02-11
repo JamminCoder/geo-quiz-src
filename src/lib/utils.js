@@ -5,3 +5,9 @@ export function capatalizeFirstLetter(string) {
 export function resolveCountryImagePath(continent, country) {
     return `/continents/maps/${ continent }/${ country.iso.toLowerCase() }/vector.svg`;
 }
+
+export async function getCountries(continentName) {
+    const res = await fetch(`/continents/json/${ continentName }.json`);
+    const json = await res.json();
+    return json.countries;
+}
