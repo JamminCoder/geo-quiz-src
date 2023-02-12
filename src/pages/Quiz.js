@@ -1,19 +1,26 @@
-import { Link, useParams } from "react-router-dom";
-import { capatalizeFirstLetter, getCountries, resolveCountryImagePath } from '../lib/utils';
+import { useParams } from "react-router-dom";
+import { 
+    resolveCountryImagePath,
+    capatalizeFirstLetter, 
+    getCountries,  
+    rand
+} from '../lib/utils';
+
 import { useState, useEffect } from 'react';
 
 async function getRandomCountries(continentName) {
     const countries = await getCountries(continentName);
 
     const len = countries.length
+    const maxIndex = len - 1;
     const selectedCountries = [];
 
     for (let i = 0; i < 4; i++) {
-        let randIndex = Math.floor(Math.random() * len);
+        let randIndex = rand(0, maxIndex);
         
         let selected = countries[randIndex];
         while (selectedCountries.includes(selected)) {
-            randIndex = Math.floor(Math.random() * len);
+            randIndex = rand(0, maxIndex);
             selected = countries[randIndex];
         }
 
