@@ -1,5 +1,6 @@
-export const CONTINENT_MAPS_PATH = '/continents/maps';
-export const CONTINENT_JSON_PATH = '/continents/json';
+export const PUBLIC_URL = process.env.PUBLIC_URL;
+export const CONTINENT_MAPS_PATH = PUBLIC_URL + '/continents/maps';
+export const CONTINENT_JSON_PATH = PUBLIC_URL + '/continents/json';
 
 // Paths
 export const resolveContinentImagePath = continent =>
