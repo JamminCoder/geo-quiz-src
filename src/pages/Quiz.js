@@ -1,7 +1,6 @@
 import { useParams } from "react-router-dom";
 import { 
     resolveCountryImagePath,
-    capatalizeFirstLetter,
     createProperName, 
 } from '../lib/utils';
 
@@ -16,25 +15,17 @@ const NewQuestionButton = () =>
 
 
 function Options({ optionsArray, correctOption }) {
-    const [message, setMessage] = useState();
+    const [messageColor, setMessageColor] = useState();
     const [btnStyle, setBtnStyle] = useState();
 
     const [isAnswered, setIsAnswered] = useState(false);
     const properName = createProperName(correctOption.country);
-    const correctAnswerMessage = `The correct answer is ${ properName }`;
-
     function handleClick(country) {
         if (isAnswered) return;
         if (country.country === correctOption.country) {
-            setMessage({
-                text: 'Correct! ' + correctAnswerMessage,
-                style: {color: 'green'
-            }});
+            setMessageColor('green');
         } else {
-            setMessage({
-                text: 'Incorrect! ' + correctAnswerMessage,
-                style: {color: 'red'}
-            });
+            setMessageColor('red');
         }
 
         setBtnStyle({
@@ -46,13 +37,19 @@ function Options({ optionsArray, correctOption }) {
     }
 
     return (
-        <div>
+        <div className='text-center'>
+            { 
+                isAnswered
+                ? <p className='text-xl font-medium mb-8' style={{ color: messageColor }}> The correct answer is { properName } </p>
+                : ""
+            }
+
             <div className='flex justify-center items-centers gap-8 mb-8'>
                 { 
                     optionsArray.map(c => <button 
                         onClick={() => handleClick(c)}
                         style={ btnStyle }
-                        className='btn hover:bg-gray-100 hover:text-gray-900' 
+                        className='btn shadow bg-white hover:bg-gray-100 hover:text-gray-900 text-xl' 
                         key={ c.iso }>
                         
                         { createProperName(c.country) }
@@ -63,11 +60,7 @@ function Options({ optionsArray, correctOption }) {
             </div>
 
             <div className='text-center grid gap-4 place-items-center'>
-                { 
-                    message 
-                    ? <p className='text-xl font-medium' style={ message.style }> { message.text }</p>
-                    : ""
-                }
+                
                 { 
                     isAnswered
                     ?  <NewQuestionButton/>
@@ -104,7 +97,7 @@ export default function Quiz() {
 
     return (
         <div className='page'>
-            <h1 className='text-4xl font-semibold mb-8'>{ capatalizeFirstLetter(continentName) }</h1>
+            <h1 className='text-4xl font-semibold mb-16'>Which country in { createProperName(continentName) } is this?</h1>
 
             <img src={ resolveCountryImagePath(continentName, answerCountry) } alt="" className='w-64 mb-8'/>
 
