@@ -27,12 +27,12 @@ function Options({ optionsArray, correctOption }) {
         if (isAnswered) return;
         if (country.country === correctOption.country) {
             setMessage({
-                text: 'Correct!' + correctAnswerMessage,
+                text: 'Correct! ' + correctAnswerMessage,
                 style: {color: 'green'
             }});
         } else {
             setMessage({
-                text: 'Incorrect!' + correctAnswerMessage,
+                text: 'Incorrect! ' + correctAnswerMessage,
                 style: {color: 'red'}
             });
         }
