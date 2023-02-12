@@ -35,7 +35,8 @@ export default function Home() {
                 <h3 className='text-3xl'>Content Attribution</h3>
                 <p>
                     Map icons: <a className='link' href="https://github.com/djaiss/mapsicon">https://github.com/djaiss/mapsicon</a> <br />
-                    Country ISO codes: <a className='link' href="https://gist.github.com/maephisto/9228207">https://gist.github.com/maephisto/9228207</a>
+                    Country ISO codes: <a className='link' href="https://gist.github.com/maephisto/9228207">https://gist.github.com/maephisto/9228207</a> <br />
+                    Audio: <a className='link' href="https://cdn.pixabay.com/download/audio/2021/08/04/audio_bb630cc098.mp3">Correct Bell</a>, <a className='link' href="https://cdn.pixabay.com/download/audio/2022/03/24/audio_757cb20504.mp3">Error</a> 
                 </p>
             </div>
         </div>

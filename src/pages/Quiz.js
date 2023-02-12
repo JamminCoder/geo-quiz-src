@@ -15,7 +15,7 @@ const NewQuestionButton = () =>
     </button>
 
 
-function Options({ optionsArray, correctOption }) {
+function Options({ optionsArray, correctOption, audio }) {
     const [messageColor, setMessageColor] = useState();
     const [btnStyle, setBtnStyle] = useState();
 
@@ -24,8 +24,10 @@ function Options({ optionsArray, correctOption }) {
     function handleClick(country) {
         if (isAnswered) return;
         if (country.country === correctOption.country) {
+            audio.correct.play();
             setMessageColor('green');
         } else {
+            audio.wrong.play();
             setMessageColor('red');
         }
 
@@ -74,18 +76,30 @@ function Options({ optionsArray, correctOption }) {
 export default function Quiz() {
     const [countries, setCountries] = useState();
     const [answerCountry, setAnswerCountry] = useState();
+    const [audio, setAudio] = useState();
 
     const [isLoaded, setIsLoaded] = useState(false);
     const { continentName } = useParams();
 
     useEffect(() => {
         if (isLoaded) return;
+        const correctAudio = new Audio("https://cdn.pixabay.com/download/audio/2021/08/04/audio_bb630cc098.mp3");
+        const wrongAudio = new Audio("https://cdn.pixabay.com/download/audio/2022/03/24/audio_757cb20504.mp3");
 
         getRandomCountries(continentName)
         .then(randCountries => {
             setCountries(randCountries);
             const randIndex = Math.floor(Math.random() * randCountries.length);
             setAnswerCountry(randCountries[randIndex]);
+
+            correctAudio.oncanplaythrough = () => {
+                wrongAudio.oncanplaythrough = () => {
+                    setAudio({
+                        correct: correctAudio,
+                        wrong: wrongAudio
+                    });
+                }
+            };
         })
         .catch(console.log)
         .finally(() => setIsLoaded(true));
@@ -99,7 +113,7 @@ export default function Quiz() {
 
             <img src={ resolveCountryImagePath(continentName, answerCountry) } alt="" className='w-64 mb-8'/>
 
-            <Options optionsArray={ countries } correctOption={ answerCountry }/>
+            <Options optionsArray={ countries } audio={ audio } correctOption={ answerCountry }/>
         </div>
     );
 }
