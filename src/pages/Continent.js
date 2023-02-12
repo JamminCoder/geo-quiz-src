@@ -18,7 +18,7 @@ export function CountriesDisplay({ continent, countriesArray }) {
     return (
         <div className='grid sm:grid-cols-3 md:grid-cols-4 gap-4'>   
             {
-               countriesArray.map(country => <Country continent={ continent } country={ country } />) 
+               countriesArray.map(country => <Country key={ country.iso } continent={ continent } country={ country } />) 
             }
         </div>
     )

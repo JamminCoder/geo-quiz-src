@@ -3,7 +3,7 @@ import { createProperName, getContinentNames, resolveContinentImagePath } from "
 
 function ContinentLink({ continentName }) {
     return (
-        <Link to={`/continents/${ continentName }`} className='text-center card hover:-translate-y-1 active:-translate-y-1 transition-transform'>
+        <Link key={ continentName } to={`/continents/${ continentName }`} className='text-center card hover:-translate-y-1 active:-translate-y-1 transition-transform'>
             <p className="text-lg mb-2">{ createProperName(continentName) }</p> 
             <img src={ resolveContinentImagePath(continentName) }/>
         </Link>
