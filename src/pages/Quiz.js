@@ -50,7 +50,7 @@ function Options({ optionsArray, correctOption }) {
                 : ""
             }
 
-            <div className='flex justify-center items-centers gap-8'>
+            <div className='flex flex-wrap justify-center items-centers gap-8'>
                 { 
                     optionsArray.map(c => <button 
                         onClick={() => handleClick(c)}
@@ -94,7 +94,7 @@ export default function Quiz() {
 
     return (
         <div className='page'>
-            <h1 className='text-4xl font-semibold mb-16'>Which country in { createProperName(continentName) } is this?</h1>
+            <h1 className='text-center text-4xl font-semibold mb-16'>Which country in { createProperName(continentName) } is this?</h1>
 
             <img src={ resolveCountryImagePath(continentName, answerCountry) } alt="" className='w-64 mb-8'/>
 
