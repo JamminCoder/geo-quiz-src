@@ -9,27 +9,40 @@ import { getRandomCountries } from '../lib/api';
 
 import { useState, useEffect } from 'react';
 
+const NewQuestionButton = () => 
+    <button className='btn bg-slate-200 shadow w-fit' onClick={ () => window.location.reload() }>
+        New Question
+    </button>
+
+
 function Options({ optionsArray, correctOption }) {
     const [message, setMessage] = useState();
-    const [refreshButton, setRefreshButton] = useState(false);
+    const [btnStyle, setBtnStyle] = useState();
+
+    const [isAnswered, setIsAnswered] = useState(false);
     const properName = createProperName(correctOption.country);
+    const correctAnswerMessage = `The correct answer is ${ properName }`;
 
     function handleClick(country) {
+        if (isAnswered) return;
         if (country.country === correctOption.country) {
             setMessage({
-                text: 'Correct! The correct answer is ' + properName,
+                text: 'Correct!' + correctAnswerMessage,
                 style: {color: 'green'
             }});
         } else {
             setMessage({
-                text: 'Incorrect! The correct answer is ' + properName,
+                text: 'Incorrect!' + correctAnswerMessage,
                 style: {color: 'red'}
             });
         }
 
-        setRefreshButton(
-            <button className='btn bg-slate-200 shadow w-fit' onClick={ () => window.location.reload() }>New Question</button>
-        );
+        setBtnStyle({
+            pointerEvents: 'none',
+            opacity: '50%'
+        });
+
+        setIsAnswered(true);
     }
 
     return (
@@ -38,6 +51,7 @@ function Options({ optionsArray, correctOption }) {
                 { 
                     optionsArray.map(c => <button 
                         onClick={() => handleClick(c)}
+                        style={ btnStyle }
                         className='btn hover:bg-gray-100 hover:text-gray-900' 
                         key={ c.iso }>
                         
@@ -49,11 +63,16 @@ function Options({ optionsArray, correctOption }) {
             </div>
 
             <div className='text-center grid gap-4 place-items-center'>
-                { message 
+                { 
+                    message 
                     ? <p className='text-xl font-medium' style={ message.style }> { message.text }</p>
                     : ""
                 }
-                { refreshButton }    
+                { 
+                    isAnswered
+                    ?  <NewQuestionButton/>
+                    : ""
+                }
             </div>
         </div>
     );
