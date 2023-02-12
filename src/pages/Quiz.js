@@ -86,20 +86,18 @@ export default function Quiz() {
         const correctAudio = new Audio("https://cdn.pixabay.com/download/audio/2021/08/04/audio_bb630cc098.mp3");
         const wrongAudio = new Audio("https://cdn.pixabay.com/download/audio/2022/03/24/audio_757cb20504.mp3");
 
+        setAudio({
+            correct: correctAudio,
+            wrong: wrongAudio
+        });
+
         getRandomCountries(continentName)
         .then(randCountries => {
             setCountries(randCountries);
             const randIndex = Math.floor(Math.random() * randCountries.length);
             setAnswerCountry(randCountries[randIndex]);
 
-            correctAudio.oncanplaythrough = () => {
-                wrongAudio.oncanplaythrough = () => {
-                    setAudio({
-                        correct: correctAudio,
-                        wrong: wrongAudio
-                    });
-                }
-            };
+            
         })
         .catch(console.log)
         .finally(() => setIsLoaded(true));
