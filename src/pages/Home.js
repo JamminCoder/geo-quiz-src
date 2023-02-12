@@ -1,12 +1,11 @@
 import { Link } from "react-router-dom";
-import { capatalizeFirstLetter } from "../lib/utils";
+import { capatalizeFirstLetter, resolveContinentImagePath } from "../lib/utils";
 
 function ContinentLink({ continentName }) {
-    const continentImagePath = `/continents/maps/${ continentName }/${ continentName }.png`;
     return (
         <Link to={`/continents/${ continentName }`} className='text-center'>
             <p className="text-lg">{ capatalizeFirstLetter(continentName) }</p> 
-            <img src={ continentImagePath }/>
+            <img src={ resolveContinentImagePath(continentName) }/>
         </Link>
     )
     
