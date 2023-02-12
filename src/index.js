@@ -6,21 +6,28 @@ import { createHashRouter, RouterProvider } from "react-router-dom";
 import Home from './pages/Home';
 import Continent from './pages/Continent';
 import Quiz from './pages/Quiz';
+import App from './App';
 
 const router = createHashRouter([
 	{
 		path: '/',
-        element: <Home/>
-	},
-	
-	{
-		path: '/continents/:continentName',
-		element: <Continent/>
-	},
-
-	{
-		path: '/quiz/:continentName',
-		element: <Quiz/>
+		element: <App/>,
+		children: [
+			{
+				path: '/',
+				element: <Home/>
+			},
+			
+			{
+				path: '/continents/:continentName',
+				element: <Continent/>
+			},
+		
+			{
+				path: '/quiz/:continentName',
+				element: <Quiz/>
+			}
+		]
 	}
 ]);
 
