@@ -25,8 +25,6 @@ export default function Home() {
                 </p>
             </div>
 
-            
-
             <h2 className='text-3xl font-medium'>Pick a Continent</h2>
             <small className='text-gray-700 mb-4'>Map sizes are not to scale.</small>
             <div className="grid grid-cols-3 gap-8 w-[100%] max-w-[40rem] mb-16">

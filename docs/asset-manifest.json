@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "https://jammincoder.github.io/geo-quiz/static/css/main.e6c13ad2.css",
-    "main.js": "https://jammincoder.github.io/geo-quiz/static/js/main.53db040f.js",
+    "main.css": "https://jammincoder.github.io/geo-quiz/static/css/main.59fb08dc.css",
+    "main.js": "https://jammincoder.github.io/geo-quiz/static/js/main.2580380b.js",
     "static/js/787.16e39cf2.chunk.js": "https://jammincoder.github.io/geo-quiz/static/js/787.16e39cf2.chunk.js",
     "index.html": "https://jammincoder.github.io/geo-quiz/index.html",
-    "main.e6c13ad2.css.map": "https://jammincoder.github.io/geo-quiz/static/css/main.e6c13ad2.css.map",
-    "main.53db040f.js.map": "https://jammincoder.github.io/geo-quiz/static/js/main.53db040f.js.map",
+    "main.59fb08dc.css.map": "https://jammincoder.github.io/geo-quiz/static/css/main.59fb08dc.css.map",
+    "main.2580380b.js.map": "https://jammincoder.github.io/geo-quiz/static/js/main.2580380b.js.map",
     "787.16e39cf2.chunk.js.map": "https://jammincoder.github.io/geo-quiz/static/js/787.16e39cf2.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.e6c13ad2.css",
-    "static/js/main.53db040f.js"
+    "static/css/main.59fb08dc.css",
+    "static/js/main.2580380b.js"
   ]
 }

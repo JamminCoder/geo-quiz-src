@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { createProperName, resolveCountryImagePath } from "../lib/utils";
+import { LoadingPage } from './Loading';
 
 import { getCountries } from "../lib/api";
 
@@ -42,7 +43,7 @@ export default function Continent(props) {
         .finally(() => setIsLoaded(true))
     })
 
-    if (!isLoaded) return 'Loading...';
+    if (!isLoaded) return <LoadingPage/>;
 
     return (
     <div className='page'>

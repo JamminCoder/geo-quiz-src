@@ -5,6 +5,7 @@ import {
 } from '../lib/utils';
 
 import { getRandomCountries } from '../lib/api';
+import { LoadingPage } from './Loading';
 
 import { useState, useEffect } from 'react';
 
@@ -90,7 +91,7 @@ export default function Quiz() {
         .finally(() => setIsLoaded(true));
     });
 
-    if (!isLoaded) return "Loading...";
+    if (!isLoaded) return <LoadingPage />;
 
     return (
         <div className='page'>

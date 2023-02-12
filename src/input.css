@@ -2,11 +2,6 @@
 @tailwind utilities;
 @tailwind components;
 
-
-body {
-    background-color: #f9f9f9;
-}
-
 @layer utilities {
     .page {
         @apply grid place-items-center py-16
