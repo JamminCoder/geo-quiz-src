@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
-import { capatalizeFirstLetter, getCountries, resolveCountryImagePath } from "../lib/utils";
+import { capatalizeFirstLetter, resolveCountryImagePath } from "../lib/utils";
+
+import { getCountries } from "../lib/api";
 
 export function Country({ continent, country }) {
     const imagePath = resolveCountryImagePath( continent, country );
