@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
-import { capatalizeFirstLetter, resolveCountryImagePath } from "../lib/utils";
+import { createProperName, resolveCountryImagePath } from "../lib/utils";
 
 import { getCountries } from "../lib/api";
 
@@ -8,7 +8,7 @@ export function Country({ continent, country }) {
     const imagePath = resolveCountryImagePath( continent, country );
     return (
         <div className="card">
-            <h3 className="text-lg font-medium text-center mb-4">{ capatalizeFirstLetter(country.country) }</h3>
+            <h3 className="text-lg font-medium text-center mb-4">{ createProperName(country.country) }</h3>
             <img src={ imagePath } alt={ country.country } className='w-44'/>
         </div>
     )
@@ -26,7 +26,7 @@ export function CountriesDisplay({ continent, countriesArray }) {
 
 export default function Continent(props) {
     const { continentName } = useParams();
-    const properName = capatalizeFirstLetter(continentName);
+    const properName = createProperName(continentName);
 
     const [countriesArray, setCountriesArray] = useState();
     const [isLoaded, setIsLoaded] = useState(false);

@@ -1,7 +1,8 @@
 import { useParams } from "react-router-dom";
 import { 
     resolveCountryImagePath,
-    capatalizeFirstLetter, 
+    capatalizeFirstLetter,
+    createProperName, 
 } from '../lib/utils';
 
 import { getRandomCountries } from '../lib/api';
@@ -11,16 +12,17 @@ import { useState, useEffect } from 'react';
 function Options({ optionsArray, correctOption }) {
     const [message, setMessage] = useState();
     const [refreshButton, setRefreshButton] = useState(false);
+    const properName = createProperName(correctOption.country);
 
     function handleClick(country) {
         if (country.country === correctOption.country) {
             setMessage({
-                text: 'Correct!',
+                text: 'Correct! The correct answer is ' + properName,
                 style: {color: 'green'
             }});
         } else {
             setMessage({
-                text: 'Incorrect! The correct answer is ' + correctOption.country,
+                text: 'Incorrect! The correct answer is ' + properName,
                 style: {color: 'red'}
             });
         }
@@ -39,7 +41,7 @@ function Options({ optionsArray, correctOption }) {
                         className='btn hover:bg-gray-100 hover:text-gray-900' 
                         key={ c.iso }>
                         
-                        { c.country }
+                        { createProperName(c.country) }
                     </button>) 
                 }
 
