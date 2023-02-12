@@ -7,10 +7,15 @@ export const resolveContinentImagePath = continent => `${ CONTINENT_MAPS_PATH }/
 export const resolveCountryImagePath = (continent, country) => `${ CONTINENT_MAPS_PATH }/${ continent }/${ country.iso.toLowerCase() }/vector.svg`;
 export const resolveContinentJsonPath = continent => `${ CONTINENT_JSON_PATH }/${ continent }.json`;
 
-export const capatalizeFirstLetter = string => string.charAt(0).toUpperCase() + string.slice(1);
 
+// API calls
 export async function getCountries(continentName) {
     const res = await fetch(resolveContinentJsonPath(continentName));
     const json = await res.json();
     return json.countries;
 }
+
+
+// Generic helpers
+export const capatalizeFirstLetter = string => string.charAt(0).toUpperCase() + string.slice(1);
+export const rand = (min, max) => Math.floor(Math.random() * max) + min;
