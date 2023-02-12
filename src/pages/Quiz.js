@@ -9,7 +9,7 @@ import { getRandomCountries } from '../lib/api';
 import { useState, useEffect } from 'react';
 
 const NewQuestionButton = () => 
-    <button className='btn bg-slate-200 shadow w-fit' onClick={ () => window.location.reload() }>
+    <button className='btn bg-white shadow w-fit' onClick={ () => window.location.reload() }>
         New Question
     </button>
 
@@ -37,14 +37,20 @@ function Options({ optionsArray, correctOption }) {
     }
 
     return (
-        <div className='text-center'>
+        <div className='grid gap-8 place-items-center'>
             { 
                 isAnswered
-                ? <p className='text-xl font-medium mb-8' style={{ color: messageColor }}> The correct answer is { properName } </p>
+                ? <p className='text-xl font-medium' style={{ color: messageColor }}> The correct answer is { properName } </p>
                 : ""
             }
 
-            <div className='flex justify-center items-centers gap-8 mb-8'>
+            { 
+                isAnswered
+                ?  <NewQuestionButton/>
+                : ""
+            }
+
+            <div className='flex justify-center items-centers gap-8'>
                 { 
                     optionsArray.map(c => <button 
                         onClick={() => handleClick(c)}
@@ -57,15 +63,6 @@ function Options({ optionsArray, correctOption }) {
                 }
 
                 
-            </div>
-
-            <div className='text-center grid gap-4 place-items-center'>
-                
-                { 
-                    isAnswered
-                    ?  <NewQuestionButton/>
-                    : ""
-                }
             </div>
         </div>
     );
