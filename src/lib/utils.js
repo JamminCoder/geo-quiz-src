@@ -9,4 +9,5 @@ export const getContinentNames = () => ['africa', 'asia', 'europe', 'oceania', '
 
 // Generic helpers
 export const capatalizeFirstLetter = string => string.charAt(0).toUpperCase() + string.slice(1);
+export const createProperName = string => string.split('_').map(capatalizeFirstLetter).join(' ');
 export const rand = (min, max) => Math.floor(Math.random() * max) + min;
