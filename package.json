@@ -1,6 +1,6 @@
 {
   "name": "geo-quiz",
-  "homepage": "https://github.com/JamminCoder/geo-quiz-build.git",
+  "homepage": "https://github.com/JamminCoder/geo-quiz.git",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -16,7 +16,7 @@
   "scripts": {
     "start": "react-scripts start",
     "tailwind": "npx tailwindcss -i ./src/input.css -o ./public/css/tailwind.css --watch --minify",
-    "build": "react-scripts build",
+    "build": "BUILD_PATH='./docs' react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
