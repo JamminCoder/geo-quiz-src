@@ -6,7 +6,7 @@ export const CONTINENT_JSON_PATH = '/continents/json';
 export const resolveContinentImagePath = continent => `${ CONTINENT_MAPS_PATH }/${ continent }/${ continent }.png`;
 export const resolveCountryImagePath = (continent, country) => `${ CONTINENT_MAPS_PATH }/${ continent }/${ country.iso.toLowerCase() }/vector.svg`;
 export const resolveContinentJsonPath = continent => `${ CONTINENT_JSON_PATH }/${ continent }.json`;
-
+export const getContinentNames = () => ['africa', 'asia', 'europe', 'oceania', 'north_america', 'south_america'];
 
 // API calls
 export async function getCountries(continentName) {

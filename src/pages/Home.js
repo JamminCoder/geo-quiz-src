@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { capatalizeFirstLetter, resolveContinentImagePath } from "../lib/utils";
+import { capatalizeFirstLetter, getContinentNames, resolveContinentImagePath } from "../lib/utils";
 
 function ContinentLink({ continentName }) {
     return (
@@ -12,7 +12,8 @@ function ContinentLink({ continentName }) {
 }
 
 export default function Home() {
-    const continents = ['africa', 'asia', 'europe', 'oceania', 'north_america', 'south_america'];
+    // This is the only place where it is neccassary to define the country names
+    const continents = getContinentNames();
 
     return (
         <div className='page'>
