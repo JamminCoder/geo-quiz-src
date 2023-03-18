@@ -20,6 +20,7 @@ const NewQuestionButton = () =>
 function Options({ setGame, optionsArray, correctOption, audio }) {
     const [messageColor, setMessageColor] = useState();
     const [btnStyle, setBtnStyle] = useState();
+    const { continentName } = useParams();
 
     const [isAnswered, setIsAnswered] = useState(false);
     const properName = createProperName(correctOption.country);
@@ -30,7 +31,7 @@ function Options({ setGame, optionsArray, correctOption, audio }) {
             // Answer is correct
             audio.correct.play();
             setMessageColor('green');
-            GameManager.incrementPoints();            
+            GameManager.incrementPoints(continentName);
 
         } else {
             // answer incorrect
