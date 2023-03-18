@@ -16,7 +16,7 @@ const NewQuestionButton = () =>
     </button>
 
 
-function Options({ optionsArray, correctOption, audio }) {
+function Options({ setGame, optionsArray, correctOption, audio }) {
     const [messageColor, setMessageColor] = useState();
     const [btnStyle, setBtnStyle] = useState();
 
@@ -42,6 +42,8 @@ function Options({ optionsArray, correctOption, audio }) {
             pointerEvents: 'none',
             opacity: '50%'
         });
+
+        setGame(GameManager.getGame());
 
         setIsAnswered(true);
     }
@@ -79,11 +81,20 @@ function Options({ optionsArray, correctOption, audio }) {
 }
 
 
+function Points({ game }) {
+    return (
+        <div className='grid place-items-center mb-8'>
+            <p>Points: { game.points }</p>
+            <p>Lives: { game.lives }</p>
+        </div>
+    );
+}
 
 export default function Quiz() {
     const [countries, setCountries] = useState();
     const [answerCountry, setAnswerCountry] = useState();
     const [audio, setAudio] = useState();
+    const [game, setGame] = useState(GameManager.getGame());
 
     const [isLoaded, setIsLoaded] = useState(false);
     const { continentName } = useParams();
@@ -114,11 +125,12 @@ export default function Quiz() {
 
     return (
         <div className='page'>
+            <Points game={ game }/>
             <h1 className='text-center text-4xl font-semibold mb-16'>Which country in { createProperName(continentName) } is this?</h1>
 
             <img src={ resolveCountryImagePath(continentName, answerCountry) } alt="" className='w-64 mb-8'/>
 
-            <Options optionsArray={ countries } audio={ audio } correctOption={ answerCountry }/>
+            <Options setGame={ setGame } optionsArray={ countries } audio={ audio } correctOption={ answerCountry }/>
         </div>
     );
 }
