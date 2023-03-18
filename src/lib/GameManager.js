@@ -1,5 +1,6 @@
 export default class GameManager {
     static newGame() {
+        const existingGame = GameManager.getGame();
         const emptyScores = {
             africa: 0,
             north_america: 0,
@@ -12,9 +13,7 @@ export default class GameManager {
         const game = {
             lives: 5,
             points: 0,
-            highScores: { 
-                ...GameManager.getGame().highScores || emptyScores
-            }
+            highScores:  existingGame ? existingGame.highScore: emptyScores
         }
 
         GameManager.setGame(game);
