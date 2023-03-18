@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { 
     resolveCountryImagePath,
     createProperName, 
@@ -91,6 +91,11 @@ function Points({ game }) {
     );
 }
 
+function resetGame() {
+    GameManager.newGame(); 
+    window.location.reload();
+}
+
 export default function Quiz() {
     const [countries, setCountries] = useState();
     const [answerCountry, setAnswerCountry] = useState();
@@ -136,6 +141,7 @@ export default function Quiz() {
     return (
         <div className='page'>
             <Points game={ game }/>
+            <button class='btn text-black mb-4' onClick={ resetGame }>Reset Game</button>
             <h1 className='text-center text-4xl font-semibold mb-16'>Which country in { createProperName(continentName) } is this?</h1>
 
             <img src={ resolveCountryImagePath(continentName, answerCountry) } alt="" className='w-64 mb-8'/>
