@@ -9,6 +9,7 @@ import { LoadingPage } from './Loading';
 
 import { useState, useEffect } from 'react';
 import GameManager from '../lib/GameManager';
+import GameOver from './GameOver';
 
 const NewQuestionButton = () => 
     <button className='btn bg-white shadow w-fit' onClick={ () => window.location.reload() }>
@@ -94,16 +95,17 @@ export default function Quiz() {
     const [countries, setCountries] = useState();
     const [answerCountry, setAnswerCountry] = useState();
     const [audio, setAudio] = useState();
-    const [game, setGame] = useState(GameManager.getGame());
-
     const [isLoaded, setIsLoaded] = useState(false);
     const { continentName } = useParams();
 
+    const [game, setGame] = useState(GameManager.getGame());
+
+    
     useEffect(() => {
         if (isLoaded) return;
         const correctAudio = new Audio("https://cdn.pixabay.com/download/audio/2021/08/04/audio_bb630cc098.mp3");
         const wrongAudio = new Audio("https://cdn.pixabay.com/download/audio/2022/03/24/audio_757cb20504.mp3");
-
+        
         setAudio({
             correct: correctAudio,
             wrong: wrongAudio
@@ -114,12 +116,20 @@ export default function Quiz() {
             setCountries(randCountries);
             const randIndex = Math.floor(Math.random() * randCountries.length);
             setAnswerCountry(randCountries[randIndex]);
-
+            
             
         })
         .catch(console.log)
         .finally(() => setIsLoaded(true));
     });
+    
+    if (game.lives <= 0) {
+        return (
+        <div className='page'>
+            <GameOver game={ game } continentName={ continentName }/>
+        </div>
+        )
+    }
 
     if (!isLoaded) return <LoadingPage />;
 

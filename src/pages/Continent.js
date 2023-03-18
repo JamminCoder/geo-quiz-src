@@ -50,6 +50,7 @@ export default function Continent(props) {
     <div className='page'>
         <h1 className='text-4xl font-bold mb-16'>{ properName }</h1>
         <Link onClick={ GameManager.newGame } to={`/quiz/${ continentName }`} className='btn bg-purple-600 text-white font-medium mb-8'>Take Quiz for { properName }</Link>
+        
         <CountriesDisplay countriesArray={ countriesArray } continent={ continentName } />
     </div>
     );
