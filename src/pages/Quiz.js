@@ -8,6 +8,7 @@ import { getRandomCountries } from '../lib/api';
 import { LoadingPage } from './Loading';
 
 import { useState, useEffect } from 'react';
+import GameManager from '../lib/GameManager';
 
 const NewQuestionButton = () => 
     <button className='btn bg-white shadow w-fit' onClick={ () => window.location.reload() }>
@@ -23,12 +24,18 @@ function Options({ optionsArray, correctOption, audio }) {
     const properName = createProperName(correctOption.country);
     function handleClick(country) {
         if (isAnswered) return;
+
         if (country.country === correctOption.country) {
+            // Answer is correct
             audio.correct.play();
             setMessageColor('green');
+            GameManager.incrementPoints();            
+
         } else {
+            // answer incorrect
             audio.wrong.play();
             setMessageColor('red');
+            GameManager.decrementLives();
         }
 
         setBtnStyle({

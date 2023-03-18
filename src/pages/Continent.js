@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { createProperName, resolveCountryImagePath } from "../lib/utils";
 import { LoadingPage } from './Loading';
+import GameManager from '../lib/GameManager';
 
 import { getCountries } from "../lib/api";
 
@@ -48,7 +49,7 @@ export default function Continent(props) {
     return (
     <div className='page'>
         <h1 className='text-4xl font-bold mb-16'>{ properName }</h1>
-        <Link to={`/quiz/${ continentName }`} className='btn bg-purple-600 text-white font-medium mb-8'>Take Quiz for { properName }</Link>
+        <Link onClick={ GameManager.newGame } to={`/quiz/${ continentName }`} className='btn bg-purple-600 text-white font-medium mb-8'>Take Quiz for { properName }</Link>
         <CountriesDisplay countriesArray={ countriesArray } continent={ continentName } />
     </div>
     );
