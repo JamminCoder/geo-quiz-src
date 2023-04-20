@@ -3,6 +3,7 @@ import { Link, useParams } from "react-router-dom";
 import { createProperName, resolveCountryImagePath } from "../lib/utils";
 import { LoadingPage } from './Loading';
 import GameManager from '../lib/GameManager';
+import CountryFlag from '../components/CountryFlag';
 
 import { getCountries } from "../lib/api";
 
@@ -11,6 +12,7 @@ export function Country({ continent, country }) {
     return (
         <div className="card">
             <h3 className="text-lg font-medium text-center mb-4">{ createProperName(country.country) }</h3>
+            <CountryFlag iso={ country.iso } />
             <img src={ imagePath } alt={ country.country } className='w-44'/>
         </div>
     )

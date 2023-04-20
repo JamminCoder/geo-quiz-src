@@ -10,6 +10,7 @@ import { LoadingPage } from './Loading';
 import { useState, useEffect } from 'react';
 import GameManager from '../lib/GameManager';
 import GameOver from './GameOver';
+import CountryFlag from '../components/CountryFlag';
 
 const NewQuestionButton = () => 
     <button className='btn bg-white shadow w-fit' onClick={ () => window.location.reload() }>
@@ -101,14 +102,26 @@ export default function Quiz() {
     const [countries, setCountries] = useState();
     const [answerCountry, setAnswerCountry] = useState();
     const [audio, setAudio] = useState();
-    const [isLoaded, setIsLoaded] = useState(false);
+    const [attempt, setAttempt] = useState(false);
+    const [hasAnswer, setHasAnswer] = useState(false);
     const { continentName } = useParams();
 
     const [game, setGame] = useState(GameManager.getGame());
 
     
     useEffect(() => {
-        if (isLoaded) return;
+        if (attempt) return;
+        
+        getRandomCountries(continentName)
+        .then(randCountries => {
+            setCountries(randCountries);
+            const randIndex = Math.floor(Math.random() * randCountries.length);
+            setAnswerCountry(randCountries[randIndex]);
+            setHasAnswer(true);
+        })
+        .catch(console.log);
+        setAttempt(true);
+
         const correctAudio = new Audio("https://cdn.pixabay.com/download/audio/2021/08/04/audio_bb630cc098.mp3");
         const wrongAudio = new Audio("https://cdn.pixabay.com/download/audio/2022/03/24/audio_757cb20504.mp3");
         
@@ -117,16 +130,6 @@ export default function Quiz() {
             wrong: wrongAudio
         });
 
-        getRandomCountries(continentName)
-        .then(randCountries => {
-            setCountries(randCountries);
-            const randIndex = Math.floor(Math.random() * randCountries.length);
-            setAnswerCountry(randCountries[randIndex]);
-            
-            
-        })
-        .catch(console.log)
-        .finally(() => setIsLoaded(true));
     });
     
     if (game.lives <= 0) {
@@ -137,14 +140,15 @@ export default function Quiz() {
         )
     }
 
-    if (!isLoaded) return <LoadingPage />;
+    if (!attempt || !hasAnswer) return <LoadingPage />;
 
     return (
         <div className='page'>
             <Points game={ game }/>
             <button class='btn text-black mb-4' onClick={ resetGame }>Reset Game</button>
-            <h1 className='text-center text-4xl font-semibold mb-16'>Which country in { createProperName(continentName) } is this?</h1>
-
+            <h1 className='text-center text-4xl font-semibold mb-8'>Which country in { createProperName(continentName) } is this?</h1>
+            
+            <CountryFlag iso={ answerCountry.iso } className='mb-8'/>
             <img src={ resolveCountryImagePath(continentName, answerCountry) } alt="" className='w-64 mb-8'/>
 
             <Options setGame={ setGame } optionsArray={ countries } audio={ audio } correctOption={ answerCountry }/>
