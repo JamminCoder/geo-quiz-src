@@ -1,6 +1,8 @@
 export default class GameManager {
     static newGame() {
-        const existingGame = GameManager.getGame();
+        let existingGame = GameManager.getGame();
+        if (!GameManager.schemaOK()) existingGame = null;
+
         const emptyScores = {
             africa: 0,
             north_america: 0,
@@ -13,17 +15,25 @@ export default class GameManager {
         const game = {
             lives: 5,
             points: 0,
-            highScores:  existingGame ? existingGame.highScore: emptyScores
+            highScores:  existingGame ? existingGame.highScores: emptyScores
         }
 
         GameManager.setGame(game);
         console.log("New game started");
     }
 
+    static schemaOK() {
+        let existingGame = GameManager.getGame();
+        if (existingGame && (!existingGame.highScores || !existingGame.lives || !existingGame.points)) {
+            return false;
+        }
+        return true;
+    }
+
     static incrementPoints(continent) {
         const game = GameManager.getGame();
         game.points += 100;
-
+        console.log(game)
         if (game.points >= game.highScores[continent]) {
             game.highScores[continent] = game.points;
         }

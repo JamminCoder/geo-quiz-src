@@ -7,6 +7,7 @@ import Home from './pages/Home';
 import Continent from './pages/Continent';
 import Quiz from './pages/Quiz';
 import App from './App';
+import GameManager from './lib/GameManager';
 
 const router = createHashRouter([
 	{
@@ -30,6 +31,10 @@ const router = createHashRouter([
 		]
 	}
 ]);
+
+if (!GameManager.schemaOK()) {
+	GameManager.newGame();
+}
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
